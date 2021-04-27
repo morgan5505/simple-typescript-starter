@@ -3,9 +3,15 @@ const sampleString = `(Name)John Doe
 (City)Ashtabula, OH
 (Flags)NYN
 
+
 (Name)Jane Doe
 (Flags)YNY
 (City)N Kingsville, OH
+
+
+
+
+
 
 (Name)Sally Jones
 (Age)25
@@ -26,6 +32,7 @@ const output: {
 }[] = [];
 let current = 0;
 stringArray.map(item => {
+  console.log(current);
   if (item.includes('(Name)')) {
     const name = item.replace('(Name)', '');
     output[current] = {
