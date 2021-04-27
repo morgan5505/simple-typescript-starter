@@ -8,7 +8,7 @@ export const handleCityState = (
       throw new Error();
     }
     const parsedCityState = cityState.replace('(City)', '');
-    const [city, state] = parsedCityState.replace(' ', '').split(',');
+    const [city, state] = parsedCityState.split(',');
     return { city, state };
   } catch (error) {
     throw new Error(DataError);

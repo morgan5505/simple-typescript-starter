@@ -62,15 +62,12 @@ stringArray.map(item => {
     current += 1;
   }
   // handle Error outside of internal functions
-  else {
-    throw new Error(DataError);
-  }
 });
 
 output.map(({ name, age, city, gender, student, employee, state }) => {
   console.log(`${name} [${age ? `${age}, ` : ''}${gender}]
   \tCity : ${city}
-  \tState : ${state ? state : 'N/A'}
+  \tState :${state ? state : ' N/A'}
   \tStudent : ${student}
   \tEmployee : ${employee}`);
 });
