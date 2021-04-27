@@ -10,8 +10,9 @@
 
 
 ## How to use 
+- run ```npm i```
 - change the sample file path in index.ts
-
+- ```npm run start```
 
 ### Scripts
 
