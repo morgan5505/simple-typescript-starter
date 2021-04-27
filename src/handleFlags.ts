@@ -9,6 +9,9 @@ export const handleFlags = (
 } => {
   try {
     const parsedFlags = flags.replace('(Flags)', '').split('');
+    if (flags.length > 2) {
+      throw new Error();
+    }
     const gender = parsedFlags[0] === 'Y' ? 'Female' : 'Male';
     const isStudent = parsedFlags[1] === 'Y' ? 'Yes' : 'No';
     const isEmployee = parsedFlags[2] === 'Y' ? 'Yes' : 'No';

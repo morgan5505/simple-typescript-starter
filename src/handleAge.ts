@@ -1,4 +1,10 @@
+import { DataError } from './consts/dataError';
+
 export const handleAge = (age: string): string => {
-  const parsedAge = age.replace('(Age)', '');
-  return parsedAge;
+  try {
+    const parsedAge = age.replace('(Age)', '');
+    return parsedAge;
+  } catch (error) {
+    throw new Error(DataError);
+  }
 };
