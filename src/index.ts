@@ -3,26 +3,15 @@ import { handleAge } from './handleAge';
 import { handleCityState } from './handleCityState';
 import { handleFlags } from './handleFlags';
 import { handleName } from './handleName';
+import { readInputFile } from './readInputFile';
 
-const sampleString = `(Name)John Doe
-(Age)20
-(City)Ashtabula, OH
-(Flags)NYN
-
-(Name)Jane Doe
-(Flags)YNY
-(City)N Kingsville, OH
-
-
-
-(Name)Sally Jones
-(Age)25
-(City)Paris
-(Flags)YYY
-`;
+const string = readInputFile();
+if (!string) {
+  throw new Error(DataError);
+}
 
 // strip all extra whitespace out so there is only a single blank line between entries!
-const stringArray = sampleString.replace(/(\n\s*?\n)\s*\n/, '$1').split('\n');
+const stringArray = string.replace(/(\n\s*?\n)\s*\n/, '$1').split('\n');
 
 const output: {
   name: string;
