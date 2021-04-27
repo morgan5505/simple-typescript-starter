@@ -1,10 +1,11 @@
 import * as fs from 'fs';
-export const readInputFile = () => {
+import { DataError } from './consts/dataError';
+export const readInputFile = (filePath: string): string => {
   try {
-    const data = fs.readFileSync('SampleInputFile.txt', 'utf8');
+    const data = fs.readFileSync(filePath, 'utf8');
     //strip out carriage return from file reading
     return data.replace(/\r/g, '');
   } catch (e) {
-    console.log('Error:', e.stack);
+    throw new Error(DataError);
   }
 };
