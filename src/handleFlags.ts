@@ -9,7 +9,7 @@ export const handleFlags = (
 } => {
   try {
     const parsedFlags = flags.replace('(Flags)', '').split('');
-    if (flags.length > 2) {
+    if (parsedFlags.length !== 3) {
       throw new Error();
     }
     const gender = parsedFlags[0] === 'Y' ? 'Female' : 'Male';
