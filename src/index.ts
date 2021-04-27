@@ -13,13 +13,16 @@ const sampleString = `(Name)John Doe
 (Flags)YNY
 (City)N Kingsville, OH
 
+
+
 (Name)Sally Jones
 (Age)25
 (City)Paris
 (Flags)YYY
 `;
 
-const stringArray = sampleString.split('\n');
+// strip all extra whitespace out so there is only a single blank line between entries!
+const stringArray = sampleString.replace(/(\n\s*?\n)\s*\n/, '$1').split('\n');
 
 const output: {
   name: string;
@@ -32,7 +35,6 @@ const output: {
 }[] = [];
 let current = 0;
 stringArray.map(item => {
-  console.log(current);
   if (item.includes('(Name)')) {
     const name = handleName(item);
     output[current] = {
