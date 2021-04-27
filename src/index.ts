@@ -1,17 +1,17 @@
+import { DataError } from './consts/dataError';
+import { handleAge } from './handleAge';
+import { handleCityState } from './handleCityState';
+import { handleFlags } from './handleFlags';
+import { handleName } from './handleName';
+
 const sampleString = `(Name)John Doe
 (Age)20
 (City)Ashtabula, OH
 (Flags)NYN
 
-
 (Name)Jane Doe
 (Flags)YNY
 (City)N Kingsville, OH
-
-
-
-
-
 
 (Name)Sally Jones
 (Age)25
@@ -34,38 +34,34 @@ let current = 0;
 stringArray.map(item => {
   console.log(current);
   if (item.includes('(Name)')) {
-    const name = item.replace('(Name)', '');
+    const name = handleName(item);
     output[current] = {
       name,
     };
   } else if (item.includes('Age')) {
-    const age = item.replace('(Age)', '');
+    const age = handleAge(item);
     const person = output[current];
     person.age = age;
     output[current] = person;
   } else if (item.includes('City')) {
-    const cityState = item.replace('(City)', '');
-    const [city, state] = cityState.split(',');
+    const { city, state } = handleCityState(item);
     const person = output[current];
     person.city = city;
     person.state = state;
     output[current] = person;
   } else if (item.includes('Flags')) {
-    const flags = item.replace('(Flags)', '').split('');
     const person = output[current];
-    const gender = flags[0] === 'Y' ? 'Female' : 'Male';
-    const isStudent = flags[1] === 'Y' ? 'Yes' : 'No';
-    const isEmployee = flags[2] === 'Y' ? 'Yes' : 'No';
+    const { gender, student, employee } = handleFlags(item);
     person.gender = gender;
-    person.student = isStudent;
-    person.employee = isEmployee;
+    person.student = student;
+    person.employee = employee;
     output[current] = person;
   } else if (item === '') {
     current += 1;
   }
-  //
+  // handle Error outside of internal functions
   else {
-    throw new Error('Invalid data, unable to process');
+    throw new Error(DataError);
   }
 });
 
