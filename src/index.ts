@@ -38,8 +38,10 @@ stringArray.map(item => {
     output[current] = person;
   } else if (item.includes('City')) {
     const cityState = item.replace('(City)', '');
+    const [city, state] = cityState.split(',');
     const person = output[current];
-    person.city = cityState;
+    person.city = city;
+    person.state = state;
     output[current] = person;
   } else if (item.includes('Flags')) {
     const flags = item.replace('(Flags)', '').split('');
@@ -51,16 +53,19 @@ stringArray.map(item => {
     person.student = isStudent;
     person.employee = isEmployee;
     output[current] = person;
-  }
-  if (item === '') {
+  } else if (item === '') {
     current += 1;
+  }
+  //
+  else {
+    throw new Error('Invalid data, unable to process');
   }
 });
 
 output.map(({ name, age, city, gender, student, employee, state }) => {
-  console.log(`${name} [${age}, ${gender}]
-  \tCity: ${city}
-  \tState: ${state}
-  \tStudent: ${student}
-  \tEmployee: ${employee}`);
+  console.log(`${name} [${age ? `${age}, ` : ''}${gender}]
+  \tCity : ${city}
+  \tState : ${state ? state : 'N/A'}
+  \tStudent : ${student}
+  \tEmployee : ${employee}`);
 });
